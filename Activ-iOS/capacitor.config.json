@@ -1,0 +1,11 @@
+{
+  "appId": "de.activ.survival",
+  "appName": "Activ",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "never",
+    "backgroundColor": "#0b160f",
+    "scrollEnabled": false,
+    "allowsLinkPreview": false
+  }
+}

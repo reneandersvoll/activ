@@ -1,0 +1,19 @@
+{
+  "name": "activ",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ACTIV – Survival Game als iOS-App",
+  "scripts": {
+    "prepare-web": "node prepare-web.js",
+    "ios:add": "npx cap add ios",
+    "ios:sync": "node prepare-web.js && npx cap sync ios",
+    "ios:open": "npx cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "latest",
+    "@capacitor/ios": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "latest"
+  }
+}

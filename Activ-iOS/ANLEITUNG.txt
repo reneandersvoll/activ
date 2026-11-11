@@ -1,0 +1,38 @@
+ACTIV ALS iOS-APP
+=================
+Grafik und Spiellogik bleiben 1:1 – die App zeigt die mobile.html im Vollbild.
+
+DU BRAUCHST
+  - einen Mac mit Xcode (aus dem App Store) – ohne Mac kann man keine iOS-App bauen
+  - Node.js (nodejs.org)
+  - eine Apple-ID (kostenlos) – nur für den App Store brauchst du ein
+    kostenpflichtiges Apple-Developer-Konto
+
+ORDNER SO ANLEGEN
+  irgendwo/
+  ├─ Activ/        <- dein kompletter Spielordner (mit allen js-Dateien!)
+  └─ Activ-iOS/    <- dieser Ordner
+
+EINMALIG (Terminal im Ordner Activ-iOS)
+  1. npm install
+  2. npm run prepare-web
+  3. npm run ios:add
+  4. npm run ios:open           -> Xcode öffnet sich
+
+IN XCODE
+  5. Links "App" anklicken -> Reiter "Signing & Capabilities"
+     -> Team: deine Apple-ID wählen
+  6. Reiter "General" -> Deployment Info:
+     nur "Landscape Left" + "Landscape Right" anhaken, "Requires full screen" an
+  7. iPhone per Kabel anschließen, oben als Ziel auswählen, ▶ drücken
+  8. Auf dem iPhone: Einstellungen -> Allgemein -> VPN & Geräteverwaltung
+     -> deinem Entwickler-Zertifikat vertrauen (bei neueren iOS-Versionen
+     zusätzlich den Entwicklermodus aktivieren)
+
+NACH ÄNDERUNGEN AM SPIEL
+  npm run ios:sync   und in Xcode erneut ▶
+
+HINWEIS
+  Mit kostenloser Apple-ID läuft die App 7 Tage, danach einfach erneut über Xcode
+  installieren. Mit Developer-Konto: dauerhaft / TestFlight / App Store.
+  Spielstände bleiben in der App gespeichert (wie im Browser).
