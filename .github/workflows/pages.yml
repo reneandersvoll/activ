@@ -14,12 +14,24 @@ jobs:
       name: github-pages
     steps:
       - uses: actions/checkout@v4
-      - name: Game zusammensuchen
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: prepare-web ausfuehren
         run: |
-          IDX=$(find Activ-iOS -name index.html -not -path "*/node_modules/*" -not -path "*/ios/*" | head -n 1)
+          PKG=$(grep -rl --include=package.json '"prepare-web"' Activ-iOS | grep -v node_modules | head -n 1)
+          if [ -n "$PKG" ]; then
+            echo "Fuehre prepare-web aus in: $(dirname "$PKG")"
+            cd "$(dirname "$PKG")" && npm install && npm run prepare-web || echo "prepare-web fehlgeschlagen"
+          fi
+      - name: Echtes Game suchen
+        run: |
+          echo "Alle index.html:"; find Activ-iOS -name index.html -not -path "*/node_modules/*"
+          IDX=$(find Activ-iOS -name index.html -not -path "*/node_modules/*" -not -path "*/ios/*" -exec grep -L -i "prepare-web\|platzhalter" {} \; | head -n 1)
+          if [ -z "$IDX" ]; then echo "FEHLER: nur Platzhalter gefunden"; exit 1; fi
+          echo "Nehme: $IDX"
           mkdir site
           cp -R "$(dirname "$IDX")"/. site/
-          test -f site/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
